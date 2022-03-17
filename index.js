@@ -13,28 +13,33 @@ const dateDiffInDays = (a, b) => {
     return Math.floor((utc2 - utc1) / MILLI_SEC_PER_DAY);
 }
 
-//Month is Zero-based
-const initialDate = new Date(2021, 5, 19); 
-const now = new Date();
-const diff = dateDiffInDays(initialDate, now);
 
-if(WORDLE_ANS_LIST.length == diff){
-    initialDate = new Date();
+const calculateWordle = () => {
+    //Month is Zero-based
+    const initialDate = new Date(2021, 5, 19); 
+    const now = new Date();
+    const diff = dateDiffInDays(initialDate, now);
+    
+    if(WORDLE_ANS_LIST.length == diff){
+        initialDate = new Date();
+    }
+    
+    //Finding today's answer
+    const ans = WORDLE_ANS_LIST.at(diff).toUpperCase();
+    return ans;
 }
-
-//Finding today's answer
-const answer = WORDLE_ANS_LIST.at(diff).toUpperCase();
 
 //Routes
 app.get('/answer', (req, res) => {
-    res.send(`Today's Wordle Answer - <b>${answer}</b>!`)    
+    res.send(`Today's Wordle Answer - <b>${calculateWordle()}</b>!`)    
 });
 
 app.get('/firstletter', (req, res) => {
-    res.send(`First letter of Today's Wordle Answer - ${answer.charAt(0)}`)
+    res.send(`First letter of Today's Wordle Answer - ${calculateWordle().charAt(0)}`)
 });
 
 app.get('/lastletter', (req, res) => {
+    const answer = calculateWordle();
     res.send(`Last letter of Today's Wordle Answer - ${answer.charAt(answer.length-1)}`)
 });
 
