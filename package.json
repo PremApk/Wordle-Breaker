@@ -13,8 +13,9 @@
   "author": "APK",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
